@@ -62,9 +62,9 @@ def init_db():
     db.create_all()
 
 
-@app.before_first_request
-def setup():
-    init_db()
+@app.before_serving
+def create_tables():
+    db.create_all()
 
 
 @app.route('/')
@@ -203,3 +203,4 @@ if __name__ == '__main__':
     # Ensure DB exists when running directly
     init_db()
     app.run(debug=True)
+
