@@ -1,3 +1,0 @@
-Flask==3.0.3
-# For Render deployment, install gunicorn so the start command works
-gunicorn==20.1.0
