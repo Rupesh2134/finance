@@ -12,9 +12,8 @@ Jinja2==3.1.6
 MarkupSafe==3.0.3
 pillow==10.4.0
 Pygments==2.19.2
-pypiwin32==223
-pywin32==311
 requests==2.32.5
 urllib3==2.5.0
 Werkzeug==3.1.3
+
 
