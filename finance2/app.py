@@ -13,10 +13,18 @@ DB_PATH = os.path.join(BASE_DIR, 'app.db')
 os.makedirs(RECORDS_DIR, exist_ok=True)
 
 app = Flask(__name__)
+
+# Secret key (from environment or fallback)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-for-local')
 
-# SQLAlchemy config (SQLite)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+# SQLAlchemy config (PostgreSQL for Render)
+database_url = os.environ.get('DATABASE_URL')
+
+# Render sometimes provides 'postgres://' instead of 'postgresql://'
+if database_url and database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://")
+
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -202,6 +210,7 @@ if __name__ == '__main__':
     # Ensure DB exists when running directly
     init_db()
     app.run(debug=True)
+
 
 
 
