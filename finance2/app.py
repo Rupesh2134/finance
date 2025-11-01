@@ -16,7 +16,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-for-local')
 
 # SQLAlchemy config (SQLite)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or f'sqlite:///{DB_PATH}'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -202,5 +202,6 @@ if __name__ == '__main__':
     # Ensure DB exists when running directly
     init_db()
     app.run(debug=True)
+
 
 
