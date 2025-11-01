@@ -62,8 +62,7 @@ def init_db():
     db.create_all()
 
 
-@app.before_serving
-def create_tables():
+with app.app_context():
     db.create_all()
 
 
@@ -203,4 +202,5 @@ if __name__ == '__main__':
     # Ensure DB exists when running directly
     init_db()
     app.run(debug=True)
+
 
